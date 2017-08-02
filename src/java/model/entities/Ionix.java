@@ -3,23 +3,41 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package model.entities;
 
+import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
 
 /**
  *
  * @author G0041775
  */
-public class Ionix {
+@Entity
+@Table(name = "IONIX_ABERTOS")
+public class Ionix implements Serializable {
 
+    @Id
+    @Column(name = "NUMERO_IONIX")
     private Long ionixNumber;
 
+    @Column(name = "DATA_ABERTURA")
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date dataAbertura;
 
-    private Integer rin;
+    @Column(name = "RIN")
+    private String rin;
 
-    private String motivo, armario;
+    @Column(name = "MOTIVO")
+    private String motivo;
+
+    @Column(name = "ARMARIO")
+    private String armario;
 
     public Ionix() {
     }
@@ -40,11 +58,11 @@ public class Ionix {
         this.dataAbertura = dataAbertura;
     }
 
-    public Integer getRin() {
+    public String getRin() {
         return rin;
     }
 
-    public void setRin(Integer rin) {
+    public void setRin(String rin) {
         this.rin = rin;
     }
 
