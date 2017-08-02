@@ -5,12 +5,13 @@
  */
 package controller;
 
+import dao.FactoryDAO;
+import dao.IonixAbertosDAO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import model.LeModel;
 
 /**
  *
@@ -19,14 +20,16 @@ import model.LeModel;
 @Path("/ionix")
 public class IonixController extends RestJaxAbstract {
 
+    IonixAbertosDAO dao = FactoryDAO.create();
+    
     @GET
     @Path("/abertas")
     @Produces(MediaType.APPLICATION_JSON)
     public Response ionixAbertas() throws Exception {
         Response r;
-
-        r = ok(new LeModel("oi"));
+        r = ok(dao.getAbertos());
         return r;
     }
+    
 
 }
