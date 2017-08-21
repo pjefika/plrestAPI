@@ -26,11 +26,11 @@ public class TroubleTicketController extends RestJaxAbstract {
     DefeitosAbertosDAO dao = FactoryDAO.createTTDAO();
     
     @GET
-    @Path("/linha/{quant}")
+    @Path("/{prod}/{falha}/{quant}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response defeitosAbertos(@PathParam("quant") Integer quant) throws Exception {
+    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("quant") Integer quant) throws Exception {
         Response r;
-        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, ProdutoTT.LINHA, quant));
+        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, quant));
         return r;
     }
     

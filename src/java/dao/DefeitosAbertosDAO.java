@@ -37,14 +37,15 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
     public DefeitosAbertosDAO() {
     }
 
-    public List<Defeito> getPorStatusPorTipo(StatusTT s, ProdutoTT p, Integer quant) {
+    public List<Defeito> getPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
 
         try {
        
-            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.data > current_date-1 and rownum <:param3 ORDER BY t.data DESC");
-            query.setParameter("param1", s.toString().toUpperCase());
-            query.setParameter("param2", p.toString().toUpperCase());
-            query.setParameter("param3", new Long(quant));
+            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
+            query.setParameter("param1", status.toString().toUpperCase());
+            query.setParameter("param2", produto.toUpperCase());
+            query.setParameter("param3", falha.toUpperCase());
+            query.setParameter("param4", new Long(quant));
             return (List<Defeito>) query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -53,8 +54,8 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
 
     }
 
-    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT s, ProdutoTT p, Integer quant) {
-        List<Defeito> lD = getPorStatusPorTipo(s, p, quant);
+    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
+        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, quant);
         
         List<TroubleTicket> lT = new ArrayList<>();
         lD.forEach((t) -> {
