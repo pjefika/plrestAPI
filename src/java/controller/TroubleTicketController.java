@@ -7,6 +7,7 @@ package controller;
 
 import dao.DefeitosAbertosDAO;
 import dao.FactoryDAO;
+import javax.ws.rs.Encoded;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -33,6 +34,25 @@ public class TroubleTicketController extends RestJaxAbstract {
         r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, quant));
         return r;
     }
+    
+    @GET
+    @Path("/prods")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response defeitosAbertos() throws Exception {
+        Response r;
+        r = ok(dao.getProdutos());
+        return r;
+    }
+    
+    @GET
+    @Path("/{prod}/falhas")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response defeitosAbertos(@PathParam("prod") String prod) throws Exception {
+        Response r;
+        r = ok(dao.getFalhas(prod));
+        return r;
+    }
+    
     
 
 }

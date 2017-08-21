@@ -40,7 +40,7 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
     public List<Defeito> getPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
 
         try {
-       
+
             Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
             query.setParameter("param1", status.toString().toUpperCase());
             query.setParameter("param2", produto.toUpperCase());
@@ -54,9 +54,30 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
 
     }
 
+    public List<String> getProdutos() {
+        try {
+            Query query = getEm().createQuery("SELECT DISTINCT(t.produto) FROM Defeito t");
+            return (List<String>) query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
+    public List<String> getFalhas(String prod) {
+        try {
+            Query query = getEm().createQuery("SELECT DISTINCT(t.falha) FROM Defeito t WHERE t.produto =:param1");
+            query.setParameter("param1", prod.toUpperCase());
+            return (List<String>) query.getResultList();
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+
     public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
         List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, quant);
-        
+
         List<TroubleTicket> lT = new ArrayList<>();
         lD.forEach((t) -> {
             TroubleTicket tt = new TroubleTicket(t, getCustomer(t.getInstancia()));
@@ -67,7 +88,7 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         });
         return lT;
     }
-    
+
     public EfikaCustomer getCustomer(String instancia) {
         try {
 
