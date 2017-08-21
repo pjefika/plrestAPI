@@ -60,9 +60,9 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         List<TroubleTicket> lT = new ArrayList<>();
         lD.forEach((t) -> {
             TroubleTicket tt = new TroubleTicket(t, getCustomer(t.getInstancia()));
-            System.out.println(tt.getDefeito().getSs());
-            System.out.println(tt.getDefeito().getInstancia());
-            System.out.println(tt.getEc().getInstancia());
+//            System.out.println(tt.getDefeito().getSs());
+//            System.out.println(tt.getDefeito().getInstancia());
+//            System.out.println(tt.getEc().getInstancia());
             lT.add(tt);
         });
         return lT;
