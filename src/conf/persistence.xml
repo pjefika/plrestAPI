@@ -3,7 +3,10 @@
     <persistence-unit name="plrestAPIPU" transaction-type="RESOURCE_LOCAL">
         <jta-data-source>java:/pregDS</jta-data-source>
         <class>model.entities.Ionix</class>
+        <class>model.entities.Defeito</class>
         <properties>
+            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
         </properties>
     </persistence-unit>
 </persistence>

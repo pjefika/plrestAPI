@@ -15,5 +15,9 @@ public class FactoryDAO {
     public static IonixAbertosDAO create() {
         return new IonixAbertosDAO();
     }
+    
+    public static DefeitosAbertosDAO createTTDAO() {
+        return new DefeitosAbertosDAO();
+    }
 
 }
