@@ -36,6 +36,15 @@ public class TroubleTicketController extends RestJaxAbstract {
     }
     
     @GET
+    @Path("/{prod}/{falha}/{start}-{quant}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("start") Integer start, @PathParam("quant") Integer quant) throws Exception {
+        Response r;
+        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, start, quant));
+        return r;
+    }
+    
+    @GET
     @Path("/prods")
     @Produces(MediaType.APPLICATION_JSON)
     public Response defeitosAbertos() throws Exception {

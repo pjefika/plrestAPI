@@ -89,6 +89,25 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         return lT;
     }
 
+    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, Integer start, Integer quant) {
+        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, start + quant);
+        List<TroubleTicket> lT = new ArrayList<>();
+        Integer leStart = lD.size() < start ? 0 : start;
+        Integer leQuant = lD.size() < quant + start ? lD.size() : quant + start;
+
+        for (int i = leStart; i < leQuant; i++) {
+            TroubleTicket tt = new TroubleTicket(lD.get(i), getCustomer(lD.get(i).getInstancia()));
+            lT.add(tt);
+            try {
+                Thread.sleep(300);
+            } catch (Exception e) {
+            }
+
+        }
+
+        return lT;
+    }
+
     public EfikaCustomer getCustomer(String instancia) {
         try {
 
