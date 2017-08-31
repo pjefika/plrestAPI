@@ -15,6 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import model.enums.ProdutoTT;
+import model.enums.RedeAcesso;
 import model.enums.StatusTT;
 
 /**
@@ -27,20 +28,20 @@ public class TroubleTicketController extends RestJaxAbstract {
     DefeitosAbertosDAO dao = FactoryDAO.createTTDAO();
     
     @GET
-    @Path("/{prod}/{falha}/{quant}")
+    @Path("/{prod}/{falha}/{rede}/{quant}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("quant") Integer quant) throws Exception {
+    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("rede") String rede, @PathParam("quant") Integer quant) throws Exception {
         Response r;
-        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, quant));
+        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, RedeAcesso.valueOf(rede.toUpperCase()), quant));
         return r;
     }
     
     @GET
-    @Path("/{prod}/{falha}/{start}-{quant}")
+    @Path("/{prod}/{falha}/{rede}/{start}-{quant}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("start") Integer start, @PathParam("quant") Integer quant) throws Exception {
+    public Response defeitosAbertos(@PathParam("prod") String prod, @PathParam("falha") String falha, @PathParam("rede") String rede, @PathParam("start") Integer start, @PathParam("quant") Integer quant) throws Exception {
         Response r;
-        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, start, quant));
+        r = ok(dao.getTTsPorStatusPorTipo(StatusTT.PENDENTE, prod, falha, RedeAcesso.valueOf(rede.toUpperCase()), start, quant));
         return r;
     }
     

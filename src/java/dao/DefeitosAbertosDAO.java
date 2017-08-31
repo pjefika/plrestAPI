@@ -16,7 +16,7 @@ import javax.persistence.Query;
 import javax.ws.rs.core.HttpHeaders;
 import model.entities.Defeito;
 import model.entities.TroubleTicket;
-import model.enums.ProdutoTT;
+import model.enums.RedeAcesso;
 import model.enums.StatusTT;
 import org.apache.http.HttpHost;
 import org.apache.http.client.config.CookieSpecs;
@@ -37,15 +37,19 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
     public DefeitosAbertosDAO() {
     }
 
-    public List<Defeito> getPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
+    public List<Defeito> getPorStatusPorTipo(StatusTT status, String produto, String falha, RedeAcesso rede, Integer quant) {
 
         try {
 
-            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
+            String condRede = rede.equals(RedeAcesso.VIVO1) ? "t.armario is null" : "t.armario is not null";
+            
+            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and "+condRede+" and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
+            
             query.setParameter("param1", status.toString().toUpperCase());
             query.setParameter("param2", produto.toUpperCase());
             query.setParameter("param3", falha.toUpperCase());
             query.setParameter("param4", new Long(quant));
+            
             return (List<Defeito>) query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -75,8 +79,8 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         }
     }
 
-    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, Integer quant) {
-        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, quant);
+    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, RedeAcesso rede, Integer quant) {
+        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, rede, quant);
 
         List<TroubleTicket> lT = new ArrayList<>();
         lD.forEach((t) -> {
@@ -89,8 +93,8 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         return lT;
     }
 
-    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, Integer start, Integer quant) {
-        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, start + quant);
+    public List<TroubleTicket> getTTsPorStatusPorTipo(StatusTT status, String produto, String falha, RedeAcesso rede, Integer start, Integer quant) {
+        List<Defeito> lD = getPorStatusPorTipo(status, produto, falha, rede, start + quant);
         List<TroubleTicket> lT = new ArrayList<>();
         Integer leStart = lD.size() < start ? 0 : start;
         Integer leQuant = lD.size() < quant + start ? lD.size() : quant + start;
