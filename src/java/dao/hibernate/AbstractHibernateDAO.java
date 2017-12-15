@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.hibernate;
 
 import br.net.gvt.efika.customer.EfikaCustomer;
 import com.google.gson.Gson;

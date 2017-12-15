@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.pl;
 
+import dao.hibernate.AbstractHibernateDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;

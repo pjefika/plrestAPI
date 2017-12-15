@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dao;
+package dao.pl;
 
 import br.net.gvt.efika.customer.EfikaCustomer;
 import com.google.gson.Gson;
+import dao.hibernate.AbstractHibernateDAO;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;

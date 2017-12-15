@@ -5,7 +5,7 @@
  */
 package controller;
 
-import dao.DefeitosAbertosDAO;
+import dao.pl.DefeitosAbertosDAO;
 import dao.FactoryDAO;
 import javax.ws.rs.Encoded;
 import javax.ws.rs.GET;

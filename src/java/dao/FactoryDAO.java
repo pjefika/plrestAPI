@@ -5,6 +5,9 @@
  */
 package dao;
 
+import dao.pl.DefeitosAbertosDAO;
+import dao.pl.IonixAbertosDAO;
+
 
 /**
  *
