@@ -12,6 +12,8 @@ import dao.FactoryDAO;
 import java.util.ArrayList;
 import java.util.List;
 import model.entities.sigitm.TicketAnormalidade;
+import model.services.massiva.filter.Filter;
+import model.services.massiva.filter.InventarioRedeTAFilterImpl;
 
 public class EventosAfetaClienteServiceImpl implements EventosAfetaClienteService {
 
@@ -22,19 +24,18 @@ public class EventosAfetaClienteServiceImpl implements EventosAfetaClienteServic
         this.cust = ec;
 
         List<EventoMassivo> eventos = new ArrayList<>();
-
         if (cust.getRede().getPlanta() == OrigemPlanta.VIVO1) {
             List<TicketAnormalidade> tas = FactoryDAO.createTicketAnormalidadeDAO().consultaByIpAddress(ec.getRede().getIpDslam());
-            tas.forEach((t) -> {
+            new InventarioRedeTAFilterImpl(ec).filter(tas).forEach((t) -> {
                 try {
                     eventos.add(this.parse(t));
                 } catch (Exception e) {
-                    e.printStackTrace();
                 }
             });
+            return eventos;
+        } else {
+            return null;
         }
-
-        return eventos;
     }
 
     public static EventoMassivo parse(TicketAnormalidade ta) {
@@ -45,7 +46,7 @@ public class EventosAfetaClienteServiceImpl implements EventosAfetaClienteServic
         ev.setTipoFalha(ta.getTipoFalha());
         ev.setDataAbertura(ta.getDataCriacao());
         ev.setDataPrevista(ta.getDataPrevista());
-        
+
         return ev;
     }
 
