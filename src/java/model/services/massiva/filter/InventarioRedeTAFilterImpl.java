@@ -25,18 +25,15 @@ public class InventarioRedeTAFilterImpl implements Filter<TicketAnormalidade> {
     public List<TicketAnormalidade> filter(List<TicketAnormalidade> lst) {
         for (TicketAnormalidade ta : lst) {
             if (ta.getFttx().getSlot() == null) {
-                System.out.println("Match slot null");
                 retorno.add(ta);
                 break;
             } else {
                 if (ta.getFttx().getSlot().intValue() == cust.getRede().getSlot().intValue()) {
                     if (ta.getFttx().getPorta() == null) {
-                        System.out.println("Match port null");
                         retorno.add(ta);
                         break;
                     } else {
                         if (ta.getFttx().getPorta().intValue() == cust.getRede().getPorta().intValue()) {
-                            System.out.println("Match mesma porta");
                             retorno.add(ta);
                             break;
                         }
