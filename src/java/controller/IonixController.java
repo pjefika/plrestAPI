@@ -6,7 +6,7 @@
 package controller;
 
 import dao.FactoryDAO;
-import dao.IonixAbertosDAO;
+import dao.pl.IonixAbertosDAO;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

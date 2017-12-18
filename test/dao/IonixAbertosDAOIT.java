@@ -5,6 +5,7 @@
  */
 package dao;
 
+import dao.pl.IonixAbertosDAO;
 import java.util.List;
 import model.entities.Ionix;
 import org.junit.After;

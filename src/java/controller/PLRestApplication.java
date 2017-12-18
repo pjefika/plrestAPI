@@ -22,6 +22,7 @@ public class PLRestApplication extends Application {
     public PLRestApplication() {
         singletons.add(new IonixController());
         singletons.add(new TroubleTicketController());
+        singletons.add(new EventosMassivosController());
     }
 
     public Set<Object> getSingletons() {
