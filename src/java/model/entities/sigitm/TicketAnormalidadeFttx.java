@@ -37,6 +37,21 @@ public class TicketAnormalidadeFttx implements Serializable {
     @Column(name = "TAB_HOSTNAME")
     private String hostName;
 
+    @Column(name = "TAB_IP")
+    private String ipAddress;
+
+    @Column(name = "TAB_RACK")
+    private Integer rack;
+
+    @Column(name = "TAB_SUBRACK")
+    private Integer subrack;
+
+    @Column(name = "TAB_SLOT")
+    private Integer slot;
+
+    @Column(name = "TAB_PORTA")
+    private Integer porta;
+
     public TicketAnormalidadeFttx() {
     }
 
@@ -70,6 +85,46 @@ public class TicketAnormalidadeFttx implements Serializable {
 
     public void setHostName(String hostName) {
         this.hostName = hostName;
+    }
+
+    public String getIpAddress() {
+        return ipAddress;
+    }
+
+    public void setIpAddress(String ipAddress) {
+        this.ipAddress = ipAddress;
+    }
+
+    public Integer getRack() {
+        return rack;
+    }
+
+    public void setRack(Integer rack) {
+        this.rack = rack;
+    }
+
+    public Integer getSubrack() {
+        return subrack;
+    }
+
+    public void setSubrack(Integer subrack) {
+        this.subrack = subrack;
+    }
+
+    public Integer getSlot() {
+        return slot;
+    }
+
+    public void setSlot(Integer slot) {
+        this.slot = slot;
+    }
+
+    public Integer getPorta() {
+        return porta;
+    }
+
+    public void setPorta(Integer porta) {
+        this.porta = porta;
     }
 
 }

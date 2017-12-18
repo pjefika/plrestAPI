@@ -7,7 +7,8 @@ package dao;
 
 import dao.pl.DefeitosAbertosDAO;
 import dao.pl.IonixAbertosDAO;
-
+import dao.sigitm.TicketAnormalidadeDAO;
+import dao.sigitm.TicketAnormalidadeDAOImpl;
 
 /**
  *
@@ -18,9 +19,13 @@ public class FactoryDAO {
     public static IonixAbertosDAO create() {
         return new IonixAbertosDAO();
     }
-    
+
     public static DefeitosAbertosDAO createTTDAO() {
         return new DefeitosAbertosDAO();
+    }
+
+    public static TicketAnormalidadeDAO createTicketAnormalidadeDAO() {
+        return new TicketAnormalidadeDAOImpl();
     }
 
 }

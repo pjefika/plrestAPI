@@ -53,6 +53,7 @@ public class TicketAnormalidade implements Serializable {
     private TicketAnormalidadeFttx fttx;
 
     public TicketAnormalidade() {
+        fttx = new TicketAnormalidadeFttx();
     }
 
     public Long getId() {
