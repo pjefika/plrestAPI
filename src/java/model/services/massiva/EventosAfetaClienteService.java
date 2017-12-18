@@ -3,24 +3,18 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller.dto;
+package model.services.massiva;
 
 import br.net.gvt.efika.customer.EfikaCustomer;
+import br.net.gvt.efika.customer.EventoMassivo;
+import java.util.List;
 
 /**
  *
  * @author G0042204
  */
-public class ConsultaEventosAfetaCliente extends AbstractDTO {
+public interface EventosAfetaClienteService {
 
-    private EfikaCustomer cust;
-
-    public EfikaCustomer getCust() {
-        return cust;
-    }
-
-    public void setCust(EfikaCustomer cust) {
-        this.cust = cust;
-    }
+    public List<EventoMassivo> consultar(EfikaCustomer ec) throws Exception;
 
 }

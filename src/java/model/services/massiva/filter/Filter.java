@@ -3,18 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model.services;
+package model.services.massiva.filter;
 
-import br.net.gvt.efika.customer.EfikaCustomer;
-import br.net.gvt.efika.customer.EventoMassivo;
 import java.util.List;
 
 /**
  *
  * @author G0042204
  */
-public interface EventosAfetaClienteService {
+public interface Filter<T> {
 
-    public List<EventoMassivo> consultar(EfikaCustomer ec) throws Exception;
+    public List<T> filter(List<T> lst);
 
 }

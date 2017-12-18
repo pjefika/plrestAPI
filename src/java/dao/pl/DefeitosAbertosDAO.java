@@ -36,6 +36,7 @@ import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 public class DefeitosAbertosDAO extends AbstractHibernateDAO {
 
     public DefeitosAbertosDAO() {
+        super("plrestAPIPU");
     }
 
     public List<Defeito> getPorStatusPorTipo(StatusTT status, String produto, String falha, RedeAcesso rede, Integer quant) {

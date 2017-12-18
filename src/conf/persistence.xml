@@ -4,6 +4,7 @@
         <jta-data-source>java:/pregDS</jta-data-source>
         <class>model.entities.Ionix</class>
         <class>model.entities.Defeito</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.show_sql" value="false"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
@@ -13,8 +14,9 @@
         <jta-data-source>java:/sigitmDS</jta-data-source>
         <class>model.entities.sigitm.TicketAnormalidade</class>
         <class>model.entities.sigitm.TicketAnormalidadeFttx</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
-            <property name="hibernate.show_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect"/>
         </properties>
     </persistence-unit>

@@ -6,14 +6,13 @@
 package model.entities.sigitm;
 
 import java.io.Serializable;
-import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 /**
  *
@@ -24,15 +23,12 @@ import javax.persistence.TemporalType;
 public class TicketAnormalidadeFttx implements Serializable {
 
     @Id
-    @Column(name = "TQA_CODIGO")
+    @Column(name = "TAB_CODIGO")
     private Long id;
 
-    @OneToOne
-    private TicketAnormalidade ticket;
-
-    @Column(name = "TQA_DATA_PREVISTA")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Calendar dataPrevista;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "TAB_TA", columnDefinition = "TQA_CODIGO")
+    private TicketAnormalidade ta;
 
     @Column(name = "TAB_HOSTNAME")
     private String hostName;
@@ -52,6 +48,9 @@ public class TicketAnormalidadeFttx implements Serializable {
     @Column(name = "TAB_PORTA")
     private Integer porta;
 
+    @Column(name = "TAB_MASSIVA")
+    private boolean massiva;
+
     public TicketAnormalidadeFttx() {
     }
 
@@ -61,22 +60,6 @@ public class TicketAnormalidadeFttx implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public TicketAnormalidade getTicket() {
-        return ticket;
-    }
-
-    public void setTicket(TicketAnormalidade ticket) {
-        this.ticket = ticket;
-    }
-
-    public Calendar getDataPrevista() {
-        return dataPrevista;
-    }
-
-    public void setDataPrevista(Calendar dataPrevista) {
-        this.dataPrevista = dataPrevista;
     }
 
     public String getHostName() {
@@ -125,6 +108,22 @@ public class TicketAnormalidadeFttx implements Serializable {
 
     public void setPorta(Integer porta) {
         this.porta = porta;
+    }
+
+    public boolean isMassiva() {
+        return massiva;
+    }
+
+    public void setMassiva(boolean massiva) {
+        this.massiva = massiva;
+    }
+
+    public TicketAnormalidade getTa() {
+        return ta;
+    }
+
+    public void setTa(TicketAnormalidade ta) {
+        this.ta = ta;
     }
 
 }

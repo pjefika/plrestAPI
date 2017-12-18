@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -43,17 +44,26 @@ public class TicketAnormalidade implements Serializable {
     /**
      * Consulta enviada com parâmetro 1219 como critério
      */
-    @Column(name = "tqa_criadopor_grupo")
+    @Column(name = "TQA_CRIADOPOR_GRUPO")
     private Integer criadorId;
 
     @Column(name = "TQA_ALARME")
     private String alarme;
 
-    @OneToOne(mappedBy = "ticket", fetch = FetchType.EAGER)
+    @Column(name = "TQA_ALARME_TIPO")
+    private String tipoAlarme;
+
+    @Column(name = "TQA_TIPO_AFETACAO")
+    private String tipoAfetacao;
+
+    @Column(name = "TQA_TIPO_FALHA")
+    private String tipoFalha;
+
+    @OneToOne(fetch = FetchType.EAGER, mappedBy = "ta")
     private TicketAnormalidadeFttx fttx;
 
     public TicketAnormalidade() {
-        fttx = new TicketAnormalidadeFttx();
+        this.fttx = new TicketAnormalidadeFttx();
     }
 
     public Long getId() {
@@ -102,6 +112,30 @@ public class TicketAnormalidade implements Serializable {
 
     public void setAlarme(String alarme) {
         this.alarme = alarme;
+    }
+
+    public String getTipoAfetacao() {
+        return tipoAfetacao;
+    }
+
+    public void setTipoAfetacao(String tipoAfetacao) {
+        this.tipoAfetacao = tipoAfetacao;
+    }
+
+    public String getTipoFalha() {
+        return tipoFalha;
+    }
+
+    public void setTipoFalha(String tipoFalha) {
+        this.tipoFalha = tipoFalha;
+    }
+
+    public String getTipoAlarme() {
+        return tipoAlarme;
+    }
+
+    public void setTipoAlarme(String tipoAlarme) {
+        this.tipoAlarme = tipoAlarme;
     }
 
     public TicketAnormalidadeFttx getFttx() {
