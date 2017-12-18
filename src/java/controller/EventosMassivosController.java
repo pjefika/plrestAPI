@@ -5,7 +5,8 @@
  */
 package controller;
 
-import controller.dto.ConsultaEventosAfetaCliente;
+import controller.dto.EventosAfetaClienteIn;
+import controller.dto.EventosAfetaClienteOut;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,10 +29,10 @@ public class EventosMassivosController extends RestJaxAbstract {
     @Path("/afetaCliente")
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response eventosAfetaCliente(ConsultaEventosAfetaCliente in) throws Exception {
+    public Response eventosAfetaCliente(EventosAfetaClienteIn in) throws Exception {
         try {
             serv = FactoryService.createEventosAfetaCliente();
-            return ok(serv.consultar(in.getCust()));
+            return ok(new EventosAfetaClienteOut(serv.consultar(in.getCust())));
         } catch (Exception e) {
             return serverError(e);
         }

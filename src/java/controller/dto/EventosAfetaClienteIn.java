@@ -11,7 +11,7 @@ import br.net.gvt.efika.customer.EfikaCustomer;
  *
  * @author G0042204
  */
-public class ConsultaEventosAfetaCliente extends AbstractDTO {
+public class EventosAfetaClienteIn extends AbstractDTO {
 
     private EfikaCustomer cust;
 
