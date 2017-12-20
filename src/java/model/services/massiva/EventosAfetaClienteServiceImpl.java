@@ -12,7 +12,6 @@ import dao.FactoryDAO;
 import java.util.ArrayList;
 import java.util.List;
 import model.entities.sigitm.TicketAnormalidade;
-import model.services.massiva.filter.Filter;
 import model.services.massiva.filter.InventarioRedeTAFilterImpl;
 
 public class EventosAfetaClienteServiceImpl implements EventosAfetaClienteService {
