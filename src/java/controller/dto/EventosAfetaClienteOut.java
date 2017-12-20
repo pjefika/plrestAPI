@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author G0042204
  */
-public class EventosAfetaClienteOut extends AbstractDTO {
+public class EventosAfetaClienteOut {
 
     private List<EventoMassivo> eventos;
 
