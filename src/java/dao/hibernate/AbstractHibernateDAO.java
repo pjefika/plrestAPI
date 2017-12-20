@@ -8,6 +8,7 @@ package dao.hibernate;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import util.Command;
 
 /**
  *
@@ -41,10 +42,18 @@ public abstract class AbstractHibernateDAO {
     }
 
     public void close() {
-        if (emf.isOpen()) {
-            em.close();
-            emf.close();
-        }
+        new Command() {
+            @Override
+            public void exec() {
+                em.close();
+            }
+        }.command();
+        new Command() {
+            @Override
+            public void exec() {
+                emf.close();
+            }
+        }.command();
     }
 
 }

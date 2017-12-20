@@ -32,6 +32,8 @@ public class TicketAnormalidadeDAOImpl extends AbstractHibernateDAO implements T
         } catch (Exception e) {
             e.printStackTrace();
             return new ArrayList<>();
+        }finally{
+            this.close();
         }
 
     }
