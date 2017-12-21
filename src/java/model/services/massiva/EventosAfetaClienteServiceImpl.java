@@ -45,6 +45,8 @@ public class EventosAfetaClienteServiceImpl implements EventosAfetaClienteServic
         ev.setTipoFalha(ta.getTipoFalha());
         ev.setDataAbertura(ta.getDataCriacao());
         ev.setDataPrevista(ta.getDataPrevista());
+        ev.setNumeroEvento(ta.getId());
+        ev.setTipoEvento("TA");
 
         return ev;
     }
