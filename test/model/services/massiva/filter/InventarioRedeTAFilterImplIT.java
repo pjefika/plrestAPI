@@ -5,8 +5,8 @@
  */
 package model.services.massiva.filter;
 
-import br.net.gvt.efika.customer.EfikaCustomer;
-import br.net.gvt.efika.customer.InventarioRede;
+import br.net.gvt.efika.efika_customer.model.customer.EfikaCustomer;
+import br.net.gvt.efika.efika_customer.model.customer.InventarioRede;
 import java.util.ArrayList;
 import java.util.List;
 import model.entities.sigitm.TicketAnormalidade;

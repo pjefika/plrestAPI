@@ -5,9 +5,9 @@
  */
 package model.services.massiva;
 
-import br.net.gvt.efika.customer.EfikaCustomer;
-import br.net.gvt.efika.customer.EventoMassivo;
-import br.net.gvt.efika.enums.OrigemPlanta;
+import br.net.gvt.efika.efika_customer.model.customer.EfikaCustomer;
+import br.net.gvt.efika.efika_customer.model.customer.EventoMassivo;
+import br.net.gvt.efika.efika_customer.model.customer.enums.OrigemPlanta;
 import dao.FactoryDAO;
 import java.util.ArrayList;
 import java.util.List;

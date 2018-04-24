@@ -5,7 +5,10 @@
  */
 package dao.pl;
 
-import br.net.gvt.efika.customer.EfikaCustomer;
+import br.net.gvt.efika.efika_customer.model.customer.EfikaCustomer;
+import br.net.gvt.efika.util.dao.http.HttpDAO;
+import br.net.gvt.efika.util.dao.http.Urls;
+import br.net.gvt.efika.util.dao.http.factory.FactoryHttpDAOAbstract;
 import com.google.gson.Gson;
 import dao.hibernate.AbstractHibernateDAO;
 import java.io.BufferedReader;
@@ -15,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.ws.rs.core.HttpHeaders;
+import model.CustomerRequest;
 import model.entities.Defeito;
 import model.entities.TroubleTicket;
 import model.enums.RedeAcesso;
@@ -44,14 +48,14 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
         try {
 
             String condRede = rede.equals(RedeAcesso.VIVO1) ? "t.armario is null" : "t.armario is not null";
-            
-            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and "+condRede+" and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
-            
+
+            Query query = getEm().createQuery("FROM Defeito t WHERE t.status =:param1 and t.produto =:param2 and t.falha =:param3 and " + condRede + " and t.data > current_date-1 and rownum <:param4 ORDER BY t.data DESC");
+
             query.setParameter("param1", status.toString().toUpperCase());
             query.setParameter("param2", produto.toUpperCase());
             query.setParameter("param3", falha.toUpperCase());
             query.setParameter("param4", new Long(quant));
-            
+
             return (List<Defeito>) query.getResultList();
         } catch (Exception e) {
             e.printStackTrace();
@@ -115,41 +119,12 @@ public class DefeitosAbertosDAO extends AbstractHibernateDAO {
     }
 
     public EfikaCustomer getCustomer(String instancia) {
+
         try {
+            FactoryHttpDAOAbstract<EfikaCustomer> fac = new FactoryHttpDAOAbstract<>(EfikaCustomer.class);
+            return (EfikaCustomer) fac.createWithoutProxy().post(Urls.CADASTRO_STEALER.getUrl(),
+                    new CustomerRequest(instancia, "plrestAPI"));
 
-            PoolingHttpClientConnectionManager cm = new PoolingHttpClientConnectionManager();
-            cm.setMaxTotal(1);
-            cm.setDefaultMaxPerRoute(1);
-            HttpHost ip = new HttpHost("10.200.35.67", 80);
-            cm.setMaxPerRoute(new HttpRoute(ip), 50);
-
-            // Cookies
-            RequestConfig globalConfig = RequestConfig.custom()
-                    .setCookieSpec(CookieSpecs.DEFAULT)
-                    .build();
-
-            CloseableHttpClient httpclient = HttpClients.custom()
-                    .setConnectionManager(cm)
-                    .setDefaultRequestConfig(globalConfig)
-                    .build();
-
-            HttpGet httpget = new HttpGet("http://10.200.35.67:80/stealerAPI/oss/" + instancia);
-            httpget.setHeader(HttpHeaders.CONTENT_TYPE, "text/html");
-            CloseableHttpResponse response = httpclient.execute(httpget);
-            InputStream instream = response.getEntity().getContent();
-            BufferedReader rd = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
-            StringBuffer result = new StringBuffer();
-            String line = "";
-            while ((line = rd.readLine()) != null) {
-                result.append(line);
-            }
-            instream.close();
-
-            Gson g = new Gson();
-
-            EfikaCustomer ec = g.fromJson(result.toString(), EfikaCustomer.class);
-
-            return ec;
         } catch (Exception e) {
             return null;
         }

@@ -5,7 +5,7 @@
  */
 package controller.dto;
 
-import br.net.gvt.efika.customer.EfikaCustomer;
+import br.net.gvt.efika.efika_customer.model.customer.EfikaCustomer;
 
 /**
  *
